@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const Home = () => {
 
+    const [weatherData, setweatherData] = useState(null)
     // const [CityName, setCityName] = useState('')
     const cityNameRef = useRef(null);
 
@@ -19,6 +20,7 @@ const Home = () => {
         try {
             const apiResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}&units=metric`)
             console.log(apiResponse, '=====> api respone')
+            setweatherData(apiResponse.data)
         }
         catch (err) {
             console.log(err)
@@ -32,6 +34,24 @@ const Home = () => {
                 <br />
                 <button type='submit'>Get Weather</button>
             </form>
+
+            <hr />
+            {weatherData && (
+                <div>
+                    City Name : {weatherData?.name}
+                    <br />
+                    Country : {weatherData?.sys?.country}
+                    <br />
+                    Temp : {weatherData?.main?.temp}
+                    <br />
+                    humidity : {weatherData?.main?.humidity}
+                    <br />
+                    wind speed : {weatherData?.wind?.speed}
+                    <br />
+                    humidity : {weatherData?.weather[0].description}
+                </div>
+            )
+            }
         </div>
     )
 }
