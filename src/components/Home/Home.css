@@ -1,0 +1,29 @@
+/* AppLayout.css */
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iphone-frame {
+    width: 390px; /* iPhone 14 Pro width */
+    height: 844px; /* iPhone 14 Pro height */
+    margin: 2rem auto;
+    border: 16px solid #e0e0e0;
+    border-radius: 40px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    background: #f9f9f9;
+    overflow-y: auto;
+    position: relative;
+    padding: 1rem;
+}
+
+/* Optional notch-style bar */
+.iphone-notch {
+    width: 120px;
+    height: 30px;
+    background: #333;
+    border-radius: 20px;
+    margin: 0 auto 1rem auto;
+}

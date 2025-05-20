@@ -1,5 +1,7 @@
 import React, { useRef, useState } from 'react'
 import axios from 'axios';
+import WeatherCard from '../WeatherWidget/WeatherWidget';
+import './Home.css'
 
 
 
@@ -27,31 +29,23 @@ const Home = () => {
         }
     }
     return (
-        <div>
-            <form onSubmit={submitHandler}>
-                <label htmlFor="">City Name</label>
-                <input ref={cityNameRef} type="text" id='cityNameInput' required minLength={2} maxLength={20} />
-                <br />
-                <button type='submit'>Get Weather</button>
-            </form>
+        <div className='container'>
+            <div className="iphone-frame">
+                <div className="iphone-notch"></div> {/* Optional notch */}
+                <form onSubmit={submitHandler}>
+                    <label htmlFor="cityNameInput">City Name</label>
+                    <input ref={cityNameRef} type="text" id='cityNameInput' required minLength={2} maxLength={20} />
+                    <br />
+                    <button type='submit'>Get Weather</button>
+                </form>
 
-            <hr />
-            {weatherData && (
-                <div>
-                    City Name : {weatherData?.name}
-                    <br />
-                    Country : {weatherData?.sys?.country}
-                    <br />
-                    Temp : {weatherData?.main?.temp}
-                    <br />
-                    humidity : {weatherData?.main?.humidity}
-                    <br />
-                    wind speed : {weatherData?.wind?.speed}
-                    <br />
-                    humidity : {weatherData?.weather[0].description}
-                </div>
-            )
-            }
+                <hr />
+                {weatherData ? (
+                    <WeatherCard weatherData={weatherData} />
+                ) : (
+                    <div>No data</div>
+                )}
+            </div>
         </div>
     )
 }
