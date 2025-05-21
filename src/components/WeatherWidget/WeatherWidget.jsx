@@ -9,7 +9,9 @@ const WeatherCard = ({ weatherData }) => {
         if (weatherData) {
             const weatherId = weatherData.weather[0].id;
             if (weatherId === 800) {
-                setBackground('/images/clearSky.jpg');
+                setBackground('/images/clearSky.gif');
+            } else if (weatherId >= 801 && weatherId <= 804) {
+                setBackground('/images/cloudy.gif');
             } else if (weatherId >= 500 && weatherId <= 531) {
                 setBackground('/images/rainy.gif');
             } else if (weatherId >= 200 && weatherId <= 232) {
@@ -18,12 +20,14 @@ const WeatherCard = ({ weatherData }) => {
                 setBackground('/images/snow.gif');
             } else if (weatherId >= 701 && weatherId <= 781) {
                 setBackground('/images/fog.gif');
+            } else {
+                setBackground('/images/default.gif'); // fallback
             }
         }
     }, [weatherData]);
 
     return (
-        <div style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover',backgroundPosition: 'center', minHeight: '100vh'}}>
+        <div style={{ backgroundImage: `url(${background})`,width:'100%', backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
 
             <div className='card'>
                 City Name : {weatherData?.name}
@@ -36,7 +40,7 @@ const WeatherCard = ({ weatherData }) => {
                 <br />
                 wind speed : {weatherData?.wind?.speed}
                 <br />
-                humidity : {weatherData?.weather[0].description}
+                Desc : {weatherData?.weather[0].description}
             </div>
         </div>
     )
