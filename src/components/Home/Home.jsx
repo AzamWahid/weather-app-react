@@ -43,7 +43,8 @@ const Home = () => {
                 {weatherData ? (
                     <WeatherCard weatherData={weatherData} />
                 ) : (
-                    <div>No data</div>
+                    <div style={{ backgroundImage: `url('/images/default.gif')` ,width:'100%', backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
+                    No data</div>
                 )}
             </div>
         </div>
