@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './WeatherWidget.css';
 
-const WeatherCard = ({ weatherData }) => {
+const WeatherCard = ({ weatherData, icon }) => {
 
     const [background, setBackground] = useState('');
 
     useEffect(() => {
         if (weatherData) {
-            const weatherId = weatherData.weather[0].id;
+            const weatherId = weatherData?.weather?.[0]?.id || 0;
+
             if (weatherId === 800) {
                 setBackground('/images/clearSky.gif');
             } else if (weatherId >= 801 && weatherId <= 804) {
@@ -24,10 +25,13 @@ const WeatherCard = ({ weatherData }) => {
                 setBackground('/images/default.gif'); // fallback
             }
         }
+        console.log(icon);
+
+
     }, [weatherData]);
 
     return (
-        <div style={{ backgroundImage: `url(${background})`,width:'100%', backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
+        <div style={{ backgroundImage: `url(${background})`, width: '100%', backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
 
             <div className='card'>
                 City Name : {weatherData?.name}
@@ -36,11 +40,13 @@ const WeatherCard = ({ weatherData }) => {
                 <br />
                 <div className='temp'> {weatherData?.main?.temp}°C </div>
                 <br />
+                <img src={`https://openweathermap.org/img/w/${icon}.png`} alt="" />
+                <br />
                 humidity : {weatherData?.main?.humidity}
                 <br />
                 wind speed : {weatherData?.wind?.speed}
                 <br />
-                Desc : {weatherData?.weather[0].description}
+                Desc: {weatherData?.weather?.[0]?.description || 'No description available'}
             </div>
         </div>
     )
